@@ -14,26 +14,26 @@ import useraccountmanager.model.UserAccount;
 @Transactional
 public class UserAccountService {
 
-    @Autowired
-    private UserAccountDAO userAccountDAO;
+	@Autowired
+	private UserAccountDAO userAccountDAO;
 
-    public List<UserAccount> getUserAccounts() {
-	return userAccountDAO.getUserAccounts();
-    }
+	public List<UserAccount> getUserAccounts() {
+		return userAccountDAO.getUserAccounts();
+	}
 
-    public void addUserAccount(UserAccount userAccount) {
-	userAccountDAO.addUserAccount(userAccount);
-    }
+	public void addUserAccount(UserAccount userAccount) {
+		userAccountDAO.addUserAccount(userAccount);
+	}
 
-    public UserAccount getUserAccountById(Long id) {
-	return userAccountDAO.getUserAccountById(id);
-    }
+	public UserAccount getUserAccountById(Long id) {
+		return userAccountDAO.getUserAccountById(id);
+	}
 
-    public void updateUserAccount(UserAccount userAccount) {
-	userAccountDAO.updateUserAccount(userAccount);
-    }
+	public void updateUserAccount(UserAccount userAccount) {
+		userAccountDAO.updateUserAccount(userAccount);
+	}
 
-    public void deleteUserAccount(Long id) {
-	userAccountDAO.deleteUserAccount(id);
-    }
+	public void deleteUserAccount(Long id) {
+		userAccountDAO.deleteUserAccount(id);
+	}
 }

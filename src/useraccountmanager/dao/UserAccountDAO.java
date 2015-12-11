@@ -8,45 +8,53 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import useraccountmanager.exception.UserAccountNotFoundException;
 import useraccountmanager.model.UserAccount;
 
 @Repository
 public class UserAccountDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+	@Autowired
+	private SessionFactory sessionFactory;
 
-    @SuppressWarnings("unchecked")
-    public List<UserAccount> getUserAccounts() {
-	Session session = sessionFactory.getCurrentSession();
-	Criteria cr = session.createCriteria(UserAccount.class);
+	@SuppressWarnings("unchecked")
+	public List<UserAccount> getUserAccounts() {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(UserAccount.class);
 
-	return cr.list();
-    }
+		return cr.list();
+	}
 
-    public void addUserAccount(UserAccount userAccount) {
-	Session session = sessionFactory.getCurrentSession();
+	public void addUserAccount(UserAccount userAccount) {
+		Session session = sessionFactory.getCurrentSession();
 
-	session.save(userAccount);
-    }
+		session.save(userAccount);
+	}
 
-    public UserAccount getUserAccountById(Long id) {
-	Session session = sessionFactory.getCurrentSession();
+	public UserAccount getUserAccountById(Long id) {
+		Session session = sessionFactory.getCurrentSession();
+		UserAccount userAccount = (UserAccount) session.get(UserAccount.class, id);
 
-	return (UserAccount) session.get(UserAccount.class, id);
-    }
+		if (userAccount == null) {
+			throw new UserAccountNotFoundException();
+		}
 
-    public void updateUserAccount(UserAccount userAccount) {
-	Session session = sessionFactory.getCurrentSession();
+		return userAccount;
+	}
 
-	session.update(userAccount);
-    }
+	public void updateUserAccount(UserAccount userAccount) {
+		Session session = sessionFactory.getCurrentSession();
 
-    public void deleteUserAccount(Long id) {
-	Session session = sessionFactory.getCurrentSession();
-	UserAccount userAccount = (UserAccount) session.get(UserAccount.class,
-		id);
+		session.update(userAccount);
+	}
 
-	session.delete(userAccount);
-    }
+	public void deleteUserAccount(Long id) {
+		Session session = sessionFactory.getCurrentSession();
+		UserAccount userAccount = (UserAccount) session.get(UserAccount.class, id);
+
+		if (userAccount == null) {
+			throw new UserAccountNotFoundException();
+		}
+		session.delete(userAccount);
+	}
 }
