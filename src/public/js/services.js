@@ -1,5 +1,5 @@
 angular.module("userAccountApp.services", []).factory("UserAccount", function($resource) {
-    return $resource("http://localhost:8080/userAccounts/:id", {id: "@id"}, {
+    return $resource("http://localhost:8080/UserAccountManager/userAccounts/:id", {id: "@id"}, {
         update: {
             method: "PUT"
         }

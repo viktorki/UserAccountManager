@@ -1,9 +1,7 @@
 package useraccountmanager.controller;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +53,7 @@ public class UserAccountController {
     }
 
     @ExceptionHandler(ValidationException.class)
-    void handleValidationException(HttpServletResponse response)
-	    throws IOException {
-	response.sendError(HttpStatus.BAD_REQUEST.value());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    void handleValidationException() {
     }
 }
