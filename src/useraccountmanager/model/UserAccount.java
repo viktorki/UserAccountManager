@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -47,7 +48,7 @@ public class UserAccount implements Serializable {
 
     @Column(name = Constants.USER_ACCOUNT_DATE_OF_BIRTH_COLUMN)
     @Temporal(TemporalType.DATE)
-    @NotEmpty
+    @NotNull
     private Date dateOfBirth;
 
     public Long getId() {
